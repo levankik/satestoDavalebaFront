@@ -1,21 +1,37 @@
-import React from "react";
-import { useState } from "react";
+import React, {useEffect} from "react";
+import {useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
+import {useLocation} from "react-router-dom";
 
+function SearchForm({onSearch}) {
 
-function SearchForm  ({onSearch})  {
+    const location = useLocation();
+    const destination = location.pathname;
 
-    const initialValues = {
-        name: "",
-        lastName: "",
-        idNumber: "",
-        birthDate: ""
+    let initialValues = {};
+
+    (destination != "/groups") ?
+        initialValues = {
+            name: "",
+            lastName: "",
+            idNumber: "",
+            birthDate: ""
+        } : initialValues = {
+            name: "",
+            groupNumber: ""
+        }
+
+    const [values, setValues] = useState({});
+
+    useEffect(() => {
+        setValues(initialValues);
+    }, [destination]);
+
+    const reset = () => {
+        setValues(initialValues)
     }
 
-    const [values, setValues] = useState(initialValues);
-    const reset = () => {setValues(initialValues)}
-
-    const search = async (event) => {
+    const searcher = async (event) => {
         event.preventDefault();
         const params = removeEmptyValues(values);
         if (typeof onSearch === 'function') {
@@ -34,64 +50,38 @@ function SearchForm  ({onSearch})  {
     }
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setValues({...values, [name]: value});
+        const value = e.target.value;
+        setValues({...values, [e.target.name]: value})
     }
 
-        return (
-            <div className="container mt-3">
-            <Form onSubmit={search} onReset={reset}>
+    return (
+        <div className="container mt-3">
+            <Form onSubmit={searcher} onReset={reset}>
                 <Row>
-                    <Col lg={3}>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                placeholder="Enter name"
-                                value={values.name}
-                                name="name"
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Col>
-
-                    <Col lg={3}>
-                        <Form.Label>LastName</Form.Label>
-                        <Form.Control
-                            placeholder="Enter lastname"
-                            value={values.lastName}
-                            name="lastName"
-                            onChange={handleChange}
-                        />
-                    </Col>
-
-                    <Col lg={3}>
-                        <Form.Label>IdNumber</Form.Label>
-                        <Form.Control
-                            placeholder="Enter IdNumber"
-                            value={values.idNumber}
-                            name="idNumber"
-                            onChange={handleChange}
-                        />
-                    </Col>
-
-                    <Col lg={3}>
-                        <Form.Label>BirthDate</Form.Label>
-                        <Form.Control
-                            placeholder="Enter birthdate"
-                            value={values.birthDate}
-                            name="birthDate"
-                            onChange={handleChange}
-                        />
-                    </Col>
+                    {Object.entries(values).slice(0, values.length).map(([key, value]) => (
+                            <Col lg={3} key={key}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>{key}</Form.Label>
+                                    <Form.Control
+                                        placeholder={key}
+                                        type="text"
+                                        name={key}
+                                        className="form-control"
+                                        onChange={(e) => handleChange(e)}
+                                        value={values.value}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        )
+                    )}
                 </Row>
-
                 <div className="d-flex bg-ingo justify-content-end">
                     <Button variant="secondary" type="reset" className="me-2"> Reset </Button>
                     <Button variant="primary" type="submit"> Search </Button>
                 </div>
             </Form>
-            </div>
-        )
+        </div>
+    )
 }
 
 export default SearchForm;
