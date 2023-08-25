@@ -5,7 +5,8 @@ import Add from "./component/Add";
 import Edit from "./component/Edit";
 import SearchForm from "./component/SearchForm";
 import View from "./component/View";
-
+import GroupStructure from "./component/GroupStructure";
+import AddInGroup from "./component/AddInGroup";
 
 function App() {
   return (
@@ -18,10 +19,13 @@ function App() {
              <Route path='/teachers/add' element={<Add/>}></Route>
              <Route path='/students/add' element={<Add/>}></Route>
              <Route path='/groups/add' element={<Add/>}></Route>
-             <Route path='/teachers/edit/:id' element={<Edit/>}> </Route>
-             <Route path='/students/edit/:id' element={<Edit/>}> </Route>
-             <Route path='/groups/edit/:id' element={<Edit/>}> </Route>
-             <Route path='/teachers/search' element={<SearchForm/>}> </Route>
+             <Route path='/groups/:groupNumber/teachers/add' element={<AddInGroup/>}></Route>
+             <Route path='/groups/:groupNumber/students/add' element={<AddInGroup/>}></Route>
+             <Route path='/teachers/edit/:id' element={<Edit/>}></Route>
+             <Route path='/students/edit/:id' element={<Edit/>}></Route>
+             <Route path='/groups/edit/:id' element={<Edit/>}></Route>
+             <Route path='/teachers/search' element={<SearchForm/>}></Route>
+             <Route path='/groups/:groupNumber/teachers' element={<GroupStructure/>}></Route>
           </Routes>
       </>
   );

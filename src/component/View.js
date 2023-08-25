@@ -20,7 +20,6 @@ function View() {
         const res =
             await Service.getAll(destination, params);
         setRecordList(res.data.content);
-        console.log(res.data);
     }
 
     return (
