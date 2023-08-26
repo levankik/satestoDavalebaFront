@@ -10,6 +10,8 @@ const Edit = () => {
     const destination = location.pathname.substring(0, location.pathname.indexOf("/edit"));
     const navigate = useNavigate();
 
+    const title = destination.includes("teachers") ? "TEACHER" : destination.includes("students") ? "STUDENT" : "GROUP";
+
     const [record, setRecord] = useState({});
 
     const {id} = useParams();
@@ -49,7 +51,7 @@ const Edit = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="card">
-                            <div className="card-header fs-3 text-center">Edit Record</div>
+                            <div className="card-header fs-3 text-center">EDIT {title}</div>
                             <div className="card-body">
                                 <form onSubmit={(e) => Update(e)}>
                                     {Object.entries(record).slice(1, record.length).map(([key, value]) => (
@@ -65,7 +67,7 @@ const Edit = () => {
                                             </div>
                                         )
                                     )}
-                                    <button className="btn btn-primary col-md-12">Update</button>
+                                    <button className="btn btn-primary col-md-12">UPDATE</button>
                                 </form>
                             </div>
                         </div>

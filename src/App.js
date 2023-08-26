@@ -26,6 +26,7 @@ function App() {
              <Route path='/groups/edit/:id' element={<Edit/>}></Route>
              <Route path='/teachers/search' element={<SearchForm/>}></Route>
              <Route path='/groups/:groupNumber/teachers' element={<GroupStructure/>}></Route>
+             <Route path='/groups/:groupNumber/students' element={<GroupStructure/>}></Route>
           </Routes>
       </>
   );

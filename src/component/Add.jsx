@@ -10,6 +10,8 @@ const Add = () => {
     const destination = location.pathname.substring(0, location.pathname.indexOf("/add"));
     const navigate = useNavigate();
 
+    const title = destination.includes("teachers") ? "TEACHER" : destination.includes("students") ? "STUDENT" : "GROUP";
+
     let initialValues = {};
 
     (destination === "/groups") ?
@@ -50,7 +52,7 @@ const Add = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="card">
-                            <div className="card-header fs-3 text-center">Add Record</div>
+                            <div className="card-header fs-3 text-center">ADD {title}</div>
                             <div className="card-body">
                                 <form onSubmit={(e) => Register(e)}>
                                     {Object.entries(record).map(([key, value]) => (
@@ -66,7 +68,7 @@ const Add = () => {
                                             </div>
                                         )
                                     )}
-                                    <button className="btn btn-primary col-md-12">Submit</button>
+                                    <button className="btn btn-primary col-md-12">SUBMIT</button>
                                 </form>
                             </div>
                         </div>

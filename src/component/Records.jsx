@@ -98,13 +98,13 @@ const Records = ({data = [], onSearch}) => {
                                             ))}
                                             <td>
                                                 <NavLink to={'edit/' + record.id} className="btn btn-sm btn-primary">
-                                                    Edit
+                                                    EDIT
                                                 </NavLink>
                                             </td>
                                             <td>
                                                 <button onClick={() => deleteRecord(record.id)}
                                                         className="btn btn-sm btn-danger ms-1">
-                                                    Delete
+                                                    DELETE
                                                 </button>
                                             </td>
                                         </tr>

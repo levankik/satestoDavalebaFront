@@ -33,11 +33,11 @@ class Service {
     }
 
     assignStudent(destination,  id) {
-        return axios.post(API_URL + destination +  "/save_student/" + id)
+        return axios.post(API_URL + destination +  "/save/" + id)
     }
 
-    removeAssignedStudent(destination, groupId, id) {
-        return axios.post(API_URL + destination + groupId + "/remove_student/" + id)
+    removeAssignedStudent(destination, id) {
+        return axios.post(API_URL + destination +  "/remove/" + id)
     }
 
     getAssignedTeachers (destination) {

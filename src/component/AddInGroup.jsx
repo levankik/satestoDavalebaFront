@@ -10,6 +10,7 @@ const AddInGroup = () => {
     console.log(destination);
     const navigate = useNavigate();
 
+    const title = destination.includes("teachers") ? "TEACHER" : "STUDENT";
 
     let assignmentValues = {
         id: ""
@@ -41,7 +42,7 @@ const AddInGroup = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="card">
-                            <div className="card-header fs-3 text-center">Add Record</div>
+                            <div className="card-header fs-3 text-center">ADD {title} TO THE GROUP</div>
                             <div className="card-body">
                                 <form onSubmit={(e) => Register(e)}>
                                     {Object.entries(assignmentParams).map(([key, value]) => (
@@ -57,7 +58,7 @@ const AddInGroup = () => {
                                             </div>
                                         )
                                     )}
-                                    <button className="btn btn-primary col-md-12">Submit</button>
+                                    <button className="btn btn-primary col-md-12">SUBMIT</button>
                                 </form>
                             </div>
                         </div>
