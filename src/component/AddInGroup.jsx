@@ -26,7 +26,7 @@ const AddInGroup = () => {
     const Register = (e) => {
         e.preventDefault();
         Service
-            .assignTeacher(destination, assignmentParams.id)
+            .assignToGroup(destination, assignmentParams.id)
             .then((res) => {
                 setAssignmentParams(assignmentValues);
                 navigate(destination);

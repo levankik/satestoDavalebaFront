@@ -24,27 +24,15 @@ class Service {
         return axios.get(API_URL + destination, {params});
     }
 
-    assignTeacher(destination,  id) {
+    assignToGroup(destination,  id) {
         return axios.post(API_URL + destination + "/save/" + id)
     }
 
-    removeAssignedTeacher(destination, id) {
+    removeFromGroup(destination, id) {
         return axios.post(API_URL + destination  + "/remove/" + id)
     }
 
-    assignStudent(destination,  id) {
-        return axios.post(API_URL + destination +  "/save/" + id)
-    }
-
-    removeAssignedStudent(destination, id) {
-        return axios.post(API_URL + destination +  "/remove/" + id)
-    }
-
-    getAssignedTeachers (destination) {
-        return axios.get(API_URL + destination)
-    }
-
-    getAssignedStudents (destination) {
+    getFromGroup (destination) {
         return axios.get(API_URL + destination)
     }
 }

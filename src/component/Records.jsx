@@ -6,7 +6,6 @@ const Records = ({data = [], onSearch}) => {
 
     const location = useLocation();
     const destination = location.pathname;
-
     const buttonTitle = destination.slice(1).toUpperCase();
 
     let initialValues = {};
@@ -38,8 +37,6 @@ const Records = ({data = [], onSearch}) => {
                 console.log(error);
             });
     };
-
-
 
     return (
         <>
@@ -80,12 +77,13 @@ const Records = ({data = [], onSearch}) => {
 
                                     <tbody>
                                     {data.map((record, num) => (
+
                                         <tr key={record.id}>
                                             <td>{num + 1}</td>
                                             {Object.entries(record).slice(1, record.length).map(([key, value]) => (
                                                 key === "assignedTeachers" || key === "assignedStudents" ? (
                                                     <td key={record.key}>
-                                                        <NavLink to={'' +  record.groupNumber + '/teachers'}
+                                                        <NavLink to={'' +  record.groupNumber + '/' + key.slice(8, key.length).toLowerCase()}
                                                                  className="btn btn-sm btn-primary">
                                                            Open {key}
                                                         </NavLink>

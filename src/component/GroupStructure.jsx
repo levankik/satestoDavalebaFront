@@ -4,7 +4,6 @@ import Service from "../service/service";
 
 const GroupStructure = () => {
 
-    const navigate = useNavigate();
     const [assignedPersons, setAssignedPersons] = useState([]);
     const location = useLocation();
     const destination = location.pathname;
@@ -18,20 +17,9 @@ const GroupStructure = () => {
         birthDate: ""
     };
 
-    function getAssignedPersons (destination, groupNumber) {
-        return null;
-    };
-
-    function removeAssignedPersons(destination, groupNumber, id) {
-        return null;
-    }
-
-    title === "TEACHER" ? getAssignedPersons = Service.getAssignedTeachers : getAssignedPersons = Service.getAssignedTeachers;
-    title === "TEACHER" ? removeAssignedPersons = Service.removeAssignedTeacher : removeAssignedPersons = Service.removeAssignedStudent;
-
-    async function loadAssignedPersons(groupNumber) {
+    async function loadAssignedPersons() {
         const res =
-            await getAssignedPersons(destination, groupNumber);
+            await Service.getFromGroup(destination);
         console.log("Res :", res);
         setAssignedPersons(res.data);
     }
@@ -41,7 +29,7 @@ const GroupStructure = () => {
     }, []);
 
     const removePersonsFromGroup = (groupNumber, id) => {
-        removeAssignedPersons(destination, groupNumber, id)
+        Service.removeFromGroup(destination, groupNumber, id)
             .then((res) => {
                 loadAssignedPersons().catch((error) => console.log(error));
             });
@@ -103,7 +91,6 @@ const GroupStructure = () => {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
