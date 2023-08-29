@@ -8,6 +8,7 @@ const Edit = () => {
 
     const location = useLocation();
     const destination = location.pathname.substring(0, location.pathname.indexOf("/edit"));
+    console.log(destination);
     const navigate = useNavigate();
 
     const title = destination.includes("teachers") ? "TEACHER" : destination.includes("students") ? "STUDENT" : "GROUP";
@@ -37,12 +38,12 @@ const Edit = () => {
         Service
             .update(destination, record)
             .then((res) => {
-                setRecord({} );
+                setRecord({});
                 navigate(destination);
             })
             .catch((error) => {
-                    console.log(error);
-                })
+                console.log(error);
+            })
     };
 
     return (
@@ -54,19 +55,22 @@ const Edit = () => {
                             <div className="card-header fs-3 text-center">EDIT {title}</div>
                             <div className="card-body">
                                 <form onSubmit={(e) => Update(e)}>
-                                    {Object.entries(record).slice(1, record.length).map(([key, value]) => (
-                                            <div className="mb-3" key={key}>
-                                                <label>Enter {key}</label>
-                                                <input
-                                                    type="text"
-                                                    name={key}
-                                                    className="form-control"
-                                                    onChange={(e) => handleChange(e)}
-                                                    value={value}
-                                                />
-                                            </div>
-                                        )
-                                    )}
+                                    {Object.entries(record).slice(1, destination.includes("groups")
+                                        ? 3 : record.length)
+                                        // record.length - 2 არ იმუშავა
+                                        .map(([key, value]) => (
+                                                <div className="mb-3" key={key}>
+                                                    <label>Enter {key}</label>
+                                                    <input
+                                                        type="text"
+                                                        name={key}
+                                                        className="form-control"
+                                                        onChange={(e) => handleChange(e)}
+                                                        value={value}
+                                                    />
+                                                </div>
+                                            )
+                                        )}
                                     <button className="btn btn-primary col-md-12">UPDATE</button>
                                 </form>
                             </div>

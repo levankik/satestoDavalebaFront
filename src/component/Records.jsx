@@ -77,7 +77,6 @@ const Records = ({data = [], onSearch}) => {
 
                                     <tbody>
                                     {data.map((record, num) => (
-
                                         <tr key={record.id}>
                                             <td>{num + 1}</td>
                                             {Object.entries(record).slice(1, record.length).map(([key, value]) => (
