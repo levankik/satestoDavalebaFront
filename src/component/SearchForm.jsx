@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
+import Service from "../service/service";
 
 function SearchForm({onSearch}) {
 
@@ -49,11 +50,6 @@ function SearchForm({onSearch}) {
         }, {});
     }
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setValues({...values, [e.target.name]: value})
-    }
-
     return (
         <div className="container mt-3">
             <Form onSubmit={searcher} onReset={reset}>
@@ -67,7 +63,8 @@ function SearchForm({onSearch}) {
                                         type="text"
                                         name={key}
                                         className="form-control"
-                                        onChange={(e) => handleChange(e)}
+                                        onChange={(e) =>
+                                            Service.handleChange(e, setValues, values)}
                                         value={values.value}
                                     />
                                 </Form.Group>

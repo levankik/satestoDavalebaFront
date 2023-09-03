@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {NavLink, useLocation} from "react-router-dom";
 import Service from "../service/service";
 
@@ -25,7 +25,7 @@ const Records = ({data = [], onSearch}) => {
             mail: "",
             birthDate: ""
         };
-     }
+    }
 
     const deleteRecord = (id) => {
         Service
@@ -82,14 +82,15 @@ const Records = ({data = [], onSearch}) => {
                                             {Object.entries(record).slice(1, record.length).map(([key, value]) => (
                                                 key === "assignedTeachers" || key === "assignedStudents" ? (
                                                     <td key={record.key}>
-                                                        <NavLink to={'' +  record.groupNumber + '/' + key.slice(8, key.length).toLowerCase()}
-                                                                 className="btn btn-sm btn-primary">
-                                                           Open {key}
+                                                        <NavLink
+                                                            to={'' + record.groupNumber + '/' + key.slice(8, key.length).toLowerCase()}
+                                                            className="btn btn-sm btn-primary">
+                                                            Open {key}
                                                         </NavLink>
                                                     </td>
                                                 ) : (
                                                     <td key={record.key}>
-                                                        {value}
+                                                        {key === "birthDate" ? Service.dateFormatting(value) : value}
                                                     </td>
                                                 )
                                             ))}

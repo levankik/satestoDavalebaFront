@@ -28,11 +28,6 @@ const Add = () => {
 
     const [record, setRecord] = useState(initialValues);
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setRecord({...record, [e.target.name]: value});
-    }
-
     const Register = (e) => {
         e.preventDefault();
         Service
@@ -59,10 +54,11 @@ const Add = () => {
                                             <div className="mb-3" key={key}>
                                                 <label>Enter {key}</label>
                                                 <input
-                                                    type="text"
+                                                    type = {key === "birthDate" ? "date" : "text"}
                                                     name={key}
                                                     className="form-control"
-                                                    onChange={(e) => handleChange(e)}
+                                                    onChange={(e) =>
+                                                        Service.handleChange(e, setRecord, record)}
                                                     value={record.value}
                                                 />
                                             </div>

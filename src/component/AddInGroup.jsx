@@ -7,9 +7,7 @@ const AddInGroup = () => {
 
     const location = useLocation();
     const destination = location.pathname.substring(0, location.pathname.indexOf("/add"));
-    console.log(destination);
     const navigate = useNavigate();
-
     const title = destination.includes("teachers") ? "TEACHER" : "STUDENT";
 
     let assignmentValues = {
@@ -17,11 +15,6 @@ const AddInGroup = () => {
     }
 
     const [assignmentParams, setAssignmentParams] = useState(assignmentValues);
-
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setAssignmentParams({...assignmentParams, [e.target.name]: value});
-    }
 
     const Register = (e) => {
         e.preventDefault();
@@ -52,7 +45,8 @@ const AddInGroup = () => {
                                                     type="text"
                                                     name={key}
                                                     className="form-control"
-                                                    onChange={(e) => handleChange(e)}
+                                                    onChange={(e) =>
+                                                        Service.handleChange(e, setAssignmentParams, assignmentParams)}
                                                     value={assignmentParams.value}
                                                 />
                                             </div>

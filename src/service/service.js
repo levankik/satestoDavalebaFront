@@ -35,6 +35,23 @@ class Service {
     getFromGroup (destination) {
         return axios.get(API_URL + destination)
     }
+
+    handleChange = (e, setRecord, record) => {
+        const value = e.target.value;
+        setRecord({...record, [e.target.name]: value});
+    }
+
+    dateFormatting (date) {
+        let myDate = new Date(date);
+        let year = myDate.getFullYear();
+        let month = myDate.getMonth() + 1;
+        if(month <= 9)
+            month = '0'+month;
+        let day= myDate.getDate();
+        if(day <= 9)
+            day = '0'+day;
+        return year +'-'+ month +'-'+ day;
+    }
 }
 
 export default new Service;

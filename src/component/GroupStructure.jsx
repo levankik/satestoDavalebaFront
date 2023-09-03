@@ -20,7 +20,6 @@ const GroupStructure = () => {
     async function loadAssignedPersons() {
         const res =
             await Service.getFromGroup(destination);
-        console.log("Res :", res);
         setAssignedPersons(res.data);
     }
 
