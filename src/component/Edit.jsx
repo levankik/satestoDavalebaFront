@@ -1,8 +1,7 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import Service from "../service/service";
-import {useLocation, useParams} from 'react-router-dom';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 
 const Edit = () => {
 
@@ -12,6 +11,7 @@ const Edit = () => {
     const title = destination.includes("teachers") ? "TEACHER" : destination.includes("students") ? "STUDENT" : "GROUP";
 
     const [record, setRecord] = useState({});
+    const [error, setError] = useState("");
 
     const {id} = useParams();
 
@@ -45,6 +45,7 @@ const Edit = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="card">
+                            <div className="card-header fs-3 text-center">{error}</div>
                             <div className="card-header fs-3 text-center">EDIT {title}</div>
                             <div className="card-body">
                                 <form onSubmit={(e) => Update(e)}>
@@ -54,13 +55,13 @@ const Edit = () => {
                                                 <div className="mb-3" key={key}>
                                                     <label>Enter {key}</label>
                                                     <input
-                                                        // type="text"
-                                                        type = {key === "birthDate" ? "date" : "text"}
+                                                        type = {key === "birthDate" ? "date" : key === "mail" ? "email": "text"}
                                                         name={key}
                                                         className="form-control"
-                                                        onChange={(e) =>
-                                                            Service.handleChange(e, setRecord, record)}
-                                                        // value={key === "birthDate" ? Service.dateFormatting(value) : value}
+                                                        onChange={(e) => {
+                                                            Service.handleError(e, error, setError);
+                                                            Service.handleChange(e, setRecord, record)
+                                                        }}
                                                         value={value}
                                                     />
                                                 </div>

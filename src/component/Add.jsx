@@ -27,6 +27,7 @@ const Add = () => {
         }
 
     const [record, setRecord] = useState(initialValues);
+    const [error, setError] = useState("");
 
     const Register = (e) => {
         e.preventDefault();
@@ -47,18 +48,22 @@ const Add = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="card">
+                            <div className="card-header fs-3 text-center text-danger"><h5>{error}</h5></div>
                             <div className="card-header fs-3 text-center">ADD {title}</div>
                             <div className="card-body">
-                                <form onSubmit={(e) => Register(e)}>
+                                <form onSubmit={(e) =>
+                                    error === "" ? Register(e) : setError("")}>
                                     {Object.entries(record).map(([key, value]) => (
                                             <div className="mb-3" key={key}>
                                                 <label>Enter {key}</label>
                                                 <input
-                                                    type = {key === "birthDate" ? "date" : "text"}
+                                                    type = {key === "birthDate" ? "date" : key === "mail" ? "email": "text"}
                                                     name={key}
                                                     className="form-control"
-                                                    onChange={(e) =>
-                                                        Service.handleChange(e, setRecord, record)}
+                                                    onChange={(e) => {
+                                                        Service.handleError(e, error, setError);
+                                                        Service.handleChange(e, setRecord, record)
+                                                    }}
                                                     value={record.value}
                                                 />
                                             </div>

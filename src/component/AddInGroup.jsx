@@ -1,7 +1,7 @@
 import {useLocation, useNavigate} from "react-router-dom";
-
 import Service from "../service/service";
 import {useState} from "react";
+
 
 const AddInGroup = () => {
 
@@ -15,6 +15,7 @@ const AddInGroup = () => {
     }
 
     const [assignmentParams, setAssignmentParams] = useState(assignmentValues);
+    const [error, setError] = useState("");
 
     const Register = (e) => {
         e.preventDefault();
@@ -35,6 +36,7 @@ const AddInGroup = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="card">
+                            <div className="card-header fs-3 text-center">{error}</div>
                             <div className="card-header fs-3 text-center">ADD {title} TO THE GROUP</div>
                             <div className="card-body">
                                 <form onSubmit={(e) => Register(e)}>
@@ -45,8 +47,10 @@ const AddInGroup = () => {
                                                     type="text"
                                                     name={key}
                                                     className="form-control"
-                                                    onChange={(e) =>
-                                                        Service.handleChange(e, setAssignmentParams, assignmentParams)}
+                                                    onChange={(e) => {
+                                                        Service.handleError(e, error, setError);
+                                                        Service.handleChange(e, setAssignmentParams, assignmentParams)
+                                                    }}
                                                     value={assignmentParams.value}
                                                 />
                                             </div>
