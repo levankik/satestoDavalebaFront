@@ -7,12 +7,16 @@ import SearchForm from "./component/SearchForm";
 import View from "./component/View";
 import GroupStructure from "./component/GroupStructure";
 import AddInGroup from "./component/AddInGroup";
+import Login from "./component/Login";
+import Register from "./component/Register";
 
 function App() {
   return (
       <>
           <Navbar/>
           <Routes>
+             <Route path='/auth/register' element={<Register/>}></Route>
+             <Route path='/auth/authenticate' element={<Login/>}></Route>
              <Route path='/teachers' element={<View/>}></Route>
              <Route path='/students' element={<View/>}></Route>
              <Route path='/groups' element={<View/>}></Route>

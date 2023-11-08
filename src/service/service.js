@@ -4,6 +4,14 @@ const API_URL = "http://localhost:8080";
 
 class Service {
 
+    register(location, record) {
+        return axios.post(API_URL + location, record);
+    }
+
+    login(location, record) {
+        return axios.post(API_URL + location, record);
+    }
+
     save(destination, record) {
         return axios.post(API_URL + destination + "/save", record);
     }

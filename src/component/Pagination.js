@@ -11,8 +11,6 @@ const Pagination = ({recordsPerPage, totalRecords, paginate}) => {
         pageNumbers.push(i)
     }
 
-    console.log(pageNumbers);
-
     return (
         <div>
             <ul className="pagination">
